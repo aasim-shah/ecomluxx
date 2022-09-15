@@ -66,11 +66,27 @@
                      <div class="col-md-7">
                         <div class="feature-cont">
                            <div class="post-info">
+                              <% if (feeds.length > 0) { %>
+                                 <% feeds.forEach(f => {%>
+                                    <span><h4 class="title" ><%= f.title %></h4></span>
+                                       <p id = "feed-articles">
+                                          <script>
+                                              $.get( "ajax/test.html", function( data ) {
+                                                $( "#feed-articles" ).html( data );
+                                                alert( "Load was performed." );
+                                              });
+                                          </script>
+                                         
+
+                                       </p>
+                                       <% }) %>
+                                       <% }else { %>
+                                       
+                                       
+                                       <p>There are no feeds available today...</p>
+                                 <% } %>
                               <!-- <img src="images/profile-img.png" alt="#" /> -->
-                              <span>
-                                 <h4>Yahoo Sports</h4>
-                                 <h5>on Jun 27, 2014</h5>
-                              </span>
+                              
                            </div>
                            <div class="post-heading">
                               <h3>We denounce with righteous indignation and dislike men who are so beguiled</h3>
@@ -362,4 +378,9 @@
       <!-- ALL PLUGINS -->
       <script src="js/custom.js"></script>
    </body>
+   <script>
+   $(function() {
+      // Handler for .ready() called.
+    });
+   </script>
 </html>

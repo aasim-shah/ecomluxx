@@ -4,6 +4,7 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const route = express.Router();
+const mongoose = require('mongoose');
 
 const hostname = '127.0.0.1';
 const port = 3000;
@@ -27,7 +28,19 @@ app.use(express.static(__dirname + "/public"));
 app.use((req, res,next)=>{
    res.status(404).send('<h1> Page not found </h1>');
 });
+ //Mongo Connection
+//  mongoose.connect('mongodb://127.0.0.1:27017/');
 
+mongoose
+  .connect('mongodb://localhost:27017/fantasyfootball-dev', {
+   //  useNewUrlParser: true,
+   //  connectWithNoPrimary: true,
+   //  useUnifiedTopology: true,
+   //  useCreateIndex: true,
+  })
+  .catch((error) => console.error(error));
+
+ 
 console.log('Running at Port 3000');
 console.log("=================================================");
 
