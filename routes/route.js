@@ -26,54 +26,30 @@ router.get('/', function(req, res, next) {
 router.get('/home', async (req, res) => {
   console.log("GET FEEDS")
   const feeds =  Feed.find({},(err, feeds) => {
-  if (err) {
-      console.log("error: "+err);
-  }
-  else{
-      res.send(feeds)
-                      // res.send(JSON.stringify())
-                    
-                  }
-                });
-  
-  
-  }
-  
-  
-
-);
+      if (err) {
+          console.log("error: "+err);
+      }
+      else{
+          // res.send(feeds)
+          res.render('home', {title: 'Picks', feeds});
+                        
+      }
+  });
+});
 router.get('/getfeeds/:id', async (req, res) => {
   // // Connection URI
   
-  console.log("GET ARTS " +req.params.id)
-  // getFeedRSS(req.params.id);
- 
-  }
-  
-  
-
-);
-// function getFeedRSS(feedId){
-// console.log("get for: "+feedId)
-// //get feedUrl
-// const feed = collection.find({_id: feedId}).toArray();
-// // const feed = client.db.collection.findOne( {_id: feedId})
-// console.log("feed: "+feed);
-
-// (
-//   async () => {
-
-//   let feed = await parser.parseURL('https://www.reddit.com/.rss');
-//   console.log(feed.title);
-
-//   feed.items.forEach(item => {
-//     console.log(item.title + ':' + item.link)
-//   });
-
-// })();
-
-// }
-
-
-  
+  console.log("GET ARTS " +req.params.id);
+  Feed.findOne({_id: req.params.id},(err, feed) => {
+    if (err) {
+        console.log("error: "+err);
+    }
+    else{
+        let feedRssFeed = parser.parseURL(feed.feedUrl);
+        console.log(feed.feedUrl);
+        
+        res.send("hello");
+    }
+  });
+});
 module.exports = router;
