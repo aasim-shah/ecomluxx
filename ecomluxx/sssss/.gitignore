@@ -1,0 +1,6 @@
+# dependencies
+node_modules/
+#Testing Files
+Testing_Raw/
+
+.env
